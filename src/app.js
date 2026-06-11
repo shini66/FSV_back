@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-
+import allRoutes from "./routes/routes.js";
 const app = express();
 
 app.use(express.json());
@@ -11,6 +11,8 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} (${req.path}) URL: ${req.url} - Headers: ${JSON.stringify(req.headers)} - Body: ${JSON.stringify(req.body)}`);
     next();
 });
+
+app.use("/api", allRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({ message: "Not Found" });
